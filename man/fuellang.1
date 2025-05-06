@@ -1,0 +1,78 @@
+.TH FUELLANG 1 "May 2025" "fuel project" "User Commands"
+.SH NAME
+fuellang \- compile and execute FuelLang source files
+
+.SH SYNOPSIS
+.B fuellang
+[\fIOPTIONS\fR] \fIFILE\fR
+
+.SH DESCRIPTION
+\fBfuellang\fR is the standalone compiler and runtime for FuelLang programs.
+
+It supports three main operations:
+.RS
+.IP \(bu
+Execute a FuelLang script directly.
+.IP \(bu
+Compile a FuelLang script to a bytecode file.
+.IP \(bu
+Transpile FuelLang code to portable C source.
+.RE
+
+Unlike \fBfuelcore\fR, \fBfuellang\fR does not support game-related APIs.  
+Instead, it provides system-level functionality such as file I/O and scripting utilities  
+that are unavailable in \fBfuelcore\fR.
+
+This makes \fBfuellang\fR suitable for scripting, tooling, and general-purpose programming  
+using the FuelLang language.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display usage information.
+
+.TP
+.B \-v, \-\-version
+Show version details.
+
+.TP
+.B \-c, \-\-compile
+Compile the input file to bytecode (.fbc).
+
+.TP
+.B \-t, \-\-transpile
+Convert the input file to equivalent C source code.
+
+.TP
+.B \-o \fIFILE\fR
+Specify the output file for compiled or transpiled code.
+
+.SH EXAMPLES
+.TP
+Run a FuelLang script:
+.B
+fuellang script.fuel
+
+.TP
+Compile to bytecode:
+.B
+fuellang -c script.fuel -o script.fbc
+
+.TP
+Transpile to C:
+.B
+fuellang -t script.fuel -o script.c
+
+.SH SEE ALSO
+.BR fuel (1)
+.BR fuelcore (1),
+.BR fuelpack (1),
+
+.SH AUTHOR
+Written by Awe Morris.
+
+.SH COPYRIGHT
+Copyright © 2025 Awe Morris.  
+This is free software; see the source for copying conditions.  
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.

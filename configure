@@ -1,0 +1,277 @@
+#!/bin/sh
+
+# Defaults
+PREFIX="/usr/local"
+HOST=""
+
+# Parse options.
+for OPT in "${@}"; do
+    case "$OPT" in
+        -h | --help)
+            echo '  --prefix=[/usr/local]'
+            echo '  --host=[windows|linux|freebsd|netbsd|openbsd|solaris|posix]'
+            exit 0
+            ;;
+        --prefix=*)
+            PREFIX=${1#--prefix=}
+            sed -e "s|^DESTDIR=.*$|DESTDIR=$PREFIX|g" Makefile > Makefile.new
+            mv Makefile.new Makefile
+            ;;
+        --host=windows)
+            HOST=windows
+            ;;
+    esac
+done
+
+# Detect a target if not specified.
+if [ -z "$HOST" ]; then
+    case "`uname -s`" in
+        MINGW*)
+	    echo 'Detected a mingw host.'
+            HOST=windows
+            ;;
+        Linux)
+	    echo 'Detected a Linux host.'
+            HOST=linux
+            ;;
+	Darwin)
+	    echo 'Detected a macOS host.'
+	    echo 'Use generic POSIX configuration, not a mac app.'
+	    HOST=posix
+            ;;
+        FreeBSD)
+	    echo 'Detected a FreeBSD host.'
+            HOST=freebsd
+            ;;
+        NetNSD)
+	    echo 'Detected a NetBSD host.'
+            HOST=netbsd
+            ;;
+        OpenBSD)
+	    echo 'Detected a OpenBSD host.'
+            HOST=openbsd
+            ;;
+        SunOS)
+	    echo 'Detected a Solaris host.'
+            HOST=solaris
+            ;;
+        Haiku)
+            echo 'Detected a BeOS/Haiku host'
+            HOST=beos
+            ;;
+        *)
+	    echo 'Cannot detect a host type.'
+            HOST=posix
+            ;;
+    esac
+fi
+
+# For Windows.
+if [ "$HOST" = "windows" ]; then
+    echo 'Configuring for Windows...'
+    set -eu
+    case "`uname -s`" in
+        MINGW*)
+            echo 'Searching for host compiler toolchain...'
+            echo -n '  gcc     ... ' && if [ ! -f "`which gcc`"     ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  g++     ... ' && if [ ! -f "`which g++`"     ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  ar      ... ' && if [ ! -f "`which ar`"      ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  strip   ... ' && if [ ! -f "`which strip`"   ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  windres ... ' && if [ ! -f "`which windres`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo ''
+            CC=gcc
+            CXX=g++
+            AR=ar
+            STRIP=strip
+            WINDRES=windres
+            ;;
+        *)
+            echo 'Searching for cross compiler toolchain...'
+            echo -n '  i686-w64-mingw32-gcc     ... ' && if [ ! -f "`which i686-w64-mingw32-gcc`"     ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  i686-w64-mingw32-g++     ... ' && if [ ! -f "`which i686-w64-mingw32-g++`"     ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  i686-w64-mingw32-ar      ... ' && if [ ! -f "`which i686-w64-mingw32-ar`"      ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  i686-w64-mingw32-strip   ... ' && if [ ! -f "`which i686-w64-mingw32-strip`"   ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo -n '  i686-w64-mingw32-windres ... ' && if [ ! -f "`which i686-w64-mingw32-windres`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+            echo ''
+            CC=i686-w64-mingw32-gcc
+            CXX=i686-w64-mingw32-g++
+            AR=i686-w64-mingw32-ar
+            STRIP=i686-w64-mingw32-strip
+            WINDRES=i686-w64-mingw32-windres
+            ;;
+    esac
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/win32|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel.exe|g" \
+        -e "s|^CC=.*$|CC=$CC|g" \
+        -e "s|^CXX=.*$|CXX=$CXX|g" \
+        -e "s|^AR=.*$|AR=$AR|g" \
+        -e "s|^STRIP=.*$|STRIP=$STRIP|g" \
+        -e "s|^WINDRES=.*$|WINDRES=$WINDRES|g" \
+        -i Makefile
+    echo 'Configured for Windows. Run make.'
+    echo ''
+    exit 0
+fi
+
+# For Linux.
+if [ "$HOST" = "linux" ]; then
+    set -eu
+    echo 'Configuring for Linux...'
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/linux|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel|g" \
+        -e "s|^CC=.*$|CC=cc|g" \
+        -e "s|^CXX=.*$|CXX=c++|g" \
+        -e "s|^AR=.*$|AR=ar|g" \
+        -e "s|^STRIP=.*$|STRIP=strip|g" \
+        -e "s|^WINDRES=.*$|WINDRES=windres|g" \
+        -i Makefile
+    echo ''
+    echo 'Searching for toolchain...'
+    echo -n '  cc ... ' && if [ ! -f "`which cc`"  ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo -n '  ar ... ' && if [ ! -f "`which ar`"  ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo ''
+    echo 'Configured for Linux. Run make.'
+    echo ''
+    exit 0
+fi
+
+# For FreeBSD.
+if [ "$HOST" = "freebsd" ]; then
+    set -eu
+    echo 'Configuring for FreeBSD...'
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/freebsd|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel|g" \
+        -e "s|^CC=.*$|CC=cc|g" \
+        -e "s|^CXX=.*$|CXX=c++|g" \
+        -e "s|^AR=.*$|AR=ar|g" \
+        -e "s|^STRIP=.*$|STRIP=strip|g" \
+        -e "s|^WINDRES=.*$|WINDRES=windres|g" \
+        < Makefile > Makefile.new
+	mv Makefile.new Makefile
+    echo ''
+    echo 'Searching for toolchain...'
+    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo ''
+    echo 'Configured for FreeBSD. Run make.'
+    echo ''
+    exit 0
+fi
+
+# For NetBSD.
+if [ "$HOST" = "netbsd" ]; then
+    set -eu
+    echo 'Configuring for NetBSD...'
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/netbsd|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel|g" \
+        -e "s|^CC=.*$|CC=cc|g" \
+        -e "s|^CXX=.*$|CXX=c++|g" \
+        -e "s|^AR=.*$|AR=ar|g" \
+        -e "s|^STRIP=.*$|STRIP=strip|g" \
+        -e "s|^WINDRES=.*$|WINDRES=windres|g" \
+        < Makefile > Makefile.new
+	mv Makefile.new Makefile
+    echo ''
+    echo 'Searching for toolchain...'
+    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo ''
+    echo 'Configured for NetBSD. Run make.'
+    echo ''
+    exit 0
+fi
+
+# For OpenBSD.
+if [ "$HOST" = "openbsd" ]; then
+    set -eu
+    echo 'Configuring for OpenBSD...'
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/openbsd|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel|g" \
+        -e "s|^CC=.*$|CC=cc|g" \
+        -e "s|^CXX=.*$|CXX=c++|g" \
+        -e "s|^AR=.*$|AR=ar|g" \
+        -e "s|^STRIP=.*$|STRIP=strip|g" \
+        -e "s|^WINDRES=.*$|WINDRES=windres|g" \
+        < Makefile > Makefile.new
+	mv Makefile.new Makefile
+    echo ''
+    echo 'Searching for toolchain...'
+    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo ''
+    echo 'Configured for OpenBSD. Run make.'
+    echo ''
+    exit 0
+fi
+
+# For Solaris.
+if [ "$HOST" = "solaris" ]; then
+    set -eu
+    echo 'Configuring for Solaris...'
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/solaris|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel|g" \
+        -e "s|^CC=.*$|CC=cc|g" \
+        -e "s|^CXX=.*$|CXX=c++|g" \
+        -e "s|^AR=.*$|AR=ar|g" \
+        -e "s|^STRIP=.*$|STRIP=strip|g" \
+        -e "s|^WINDRES=.*$|WINDRES=windres|g" \
+        < Makefile > Makefile.new
+	mv Makefile.new Makefile
+    echo ''
+    echo 'Searching for toolchain...'
+    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo ''
+    echo 'Configured for Solaris. Run make.'
+    echo ''
+    exit 0
+fi
+
+# For BeOS/Haiku
+if [ "$HOST" = "beos" ]; then
+    set -eu
+    echo 'Configuring for BeOS/Haiku...'
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/haiku|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel|g" \
+        -e "s|^CC=.*$|CC=cc|g" \
+        -e "s|^CXX=.*$|CXX=c++|g" \
+        -e "s|^AR=.*$|AR=ar|g" \
+        -e "s|^STRIP=.*$|STRIP=strip|g" \
+        -e "s|^WINDRES=.*$|WINDRES=windres|g" \
+        < Makefile > Makefile.new
+	mv Makefile.new Makefile
+    echo ''
+    echo 'Searching for toolchain...'
+    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo ''
+    echo 'Configured for BeOS/Haiku. Run make.'
+    echo ''
+    exit 0
+fi
+
+# For generic POSIX
+if [ "$HOST" = "posix" ]; then
+    set -eu
+    echo 'Configuring for Solaris...'
+    sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/posix|g" \
+        -e "s|^TARGET=.*$|TARGET=fuel|g" \
+        -e "s|^CC=.*$|CC=cc|g" \
+        -e "s|^CXX=.*$|CXX=c++|g" \
+        -e "s|^AR=.*$|AR=ar|g" \
+        -e "s|^STRIP=.*$|STRIP=strip|g" \
+        -e "s|^WINDRES=.*$|WINDRES=windres|g" \
+        < Makefile > Makefile.new
+	mv Makefile.new Makefile
+    echo ''
+    echo 'Searching for toolchain...'
+    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo ''
+    echo 'Configured for generix POSIX. Run make.'
+    echo ''
+    exit 0
+fi
+
+echo 'Host not detected.'
+exit 1

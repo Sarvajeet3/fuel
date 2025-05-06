@@ -1,0 +1,7 @@
+site_name: Project Wiki
+nav:
+  - Home: index.md
+  - Guide:
+      - Getting Started: guide/getting-started.md
+theme:
+  name: material

@@ -1,0 +1,72 @@
+.TH FUEL 1 "May 2025" "fuel project" "User Commands"
+.SH NAME
+fuel \- command-line interface for fuel game projects
+
+.SH SYNOPSIS
+.B fuel
+[\fICOMMAND\fR] [\fIOPTIONS\fR]
+
+.SH DESCRIPTION
+\fBfuel\fR is a command-line frontend for working with game projects built using the fuel engine.
+
+It provides commands to run or build a fuel project from the current directory.
+
+.SH COMMANDS
+.TP
+.B run
+Launch the game project in the current directory.  
+Internally invokes \fBfuelcore\fR to execute the main source file (e.g., \fImain.fuel\fR).
+
+.TP
+.B build \fIPLATFORM\fR \fIDESTDIR\fR
+Export the game project for a specific target platform.  
+This command compiles the project using \fBfuellang\fR, converts it to C source code,  
+and generates a platform-specific source tree in the specified destination directory.
+
+Supported platforms:
+.RS
+.TP
+.B windows
+Generate Visual Studio-compatible project structure and C code for Windows.
+
+.TP
+.B macos
+Generate an Xcode-compatible macOS project.
+
+.TP
+.B linux
+Generate a standard Makefile-based Linux project.
+.RE
+
+.SH OPTIONS
+Each subcommand may define its own options.  
+Use \fBfuel \fICOMMAND\fR \fB--help\fR for more information.
+
+.SH EXAMPLES
+.TP
+Run the current fuel project:
+.B
+fuel run
+
+.TP
+Export the project for macOS into the ./export/macos directory:
+.B
+fuel build macos ./export/macos
+
+.TP
+Export for Windows (Visual Studio project):
+.B
+fuel build windows ./export/windows
+
+.SH SEE ALSO
+.BR fuelcore (1),
+.BR fuellang (1)
+.BR fuelpack (1)
+
+.SH AUTHOR
+Written by Awe Morris.
+
+.SH COPYRIGHT
+Copyright © 2025 fuel project.  
+This is free software; see the source for copying conditions.  
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

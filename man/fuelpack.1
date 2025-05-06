@@ -1,0 +1,46 @@
+.TH FUELPACK 1 "May 2025" "fuel project" "User Commands"
+.SH NAME
+fuelpack \- package multiple files into a single game.dat archive
+.SH SYNOPSIS
+.B fuelpack
+.RI [ FILE... ]
+.SH DESCRIPTION
+.B fuelpack
+is a simple command-line tool that packages multiple input files
+into a single archive file named
+.BR game.dat .
+This is intended for use with games and applications built with the
+.B fuel
+game engine.
+
+The files are stored in the order provided, and no compression or metadata
+is applied. The tool is designed for maximum simplicity and speed.
+
+.SH OPTIONS
+None.
+
+.SH EXAMPLES
+.TP
+.B fuelpack main.fuel map.png bgm.ogg
+Packages the files
+.I main.fuel
+,
+.I map.png
+, and
+.I bgm.ogg
+into
+.BR game.dat .
+
+.SH SEE ALSO
+.BR fuel (1),
+.BR fuelcore (1),
+.BR fuellang (1)
+
+.SH AUTHOR
+Written by Awe Morris.
+
+.SH COPYRIGHT
+Copyright © 2025 Awe Morris.  
+This is free software; see the source for copying conditions.  
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
