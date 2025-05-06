@@ -1,5 +1,5 @@
 DESTDIR=/usr/local
-BUILDDIR=build/freebsd
+BUILDDIR=build/posix
 TARGET_POSTFIX=
 CC=cc
 CXX=c++

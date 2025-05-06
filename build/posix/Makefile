@@ -90,9 +90,9 @@ OBJS_TOP=\
 # Main Target
 #
 
-all: fuel
+all: fuelcore
 
-fuel: $(OBJS_LANG) $(OBJS_PLATFORM) $(OBJS_ENGINE) $(OBJS_TOP)
+fuelcore: $(OBJS_LANG) $(OBJS_PLATFORM) $(OBJS_ENGINE) $(OBJS_TOP)
 	$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
 
 #
