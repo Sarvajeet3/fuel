@@ -55,11 +55,12 @@ If a game window appears, everything is working correctly.
 You can export your game using this command:
 
 ```
-fuel export windows export_win
+fuel export windows dest-win
 ```
 
-The exported files for Windows will be placed in the `export_win` folder.
+The exported files for Windows will be placed in the `dest-win` folder.
 Other platforms are also supported in a similar way.
+(Run `fuel export` to show target platforms.)
 
 With just a few simple commands, you can go from a blank folder to a running and exported game.
 For more details, please see the [documentation.](index.md)

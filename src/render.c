@@ -26,7 +26,7 @@ static int search_free_entry(void);
 /*
  * Load a texture.
  */
-bool load_texture(const char *fname, int *ret)
+bool load_texture(const char *fname, int *ret, int *width, int *height)
 {
 	int index;
 	const char *ext;
@@ -79,6 +79,8 @@ bool load_texture(const char *fname, int *ret)
 
 	/* Succeeded. */
 	*ret = index;
+	*width = tex_tbl[index].img->width;
+	*height = tex_tbl[index].img->height;
 	return true;
 }
 

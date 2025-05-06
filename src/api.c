@@ -16,6 +16,7 @@ static bool get_int_param(struct rt_env *rt, const char *name, int *ret);
 static bool get_float_param(struct rt_env *rt, const char *name, float *ret);
 #endif
 static bool get_string_param(struct rt_env *rt, const char *name, const char **ret);
+static bool get_dict_elem_int_param(struct rt_env *rt, const char *name, const char *key, int *ret);
 
 /* debug() */
 static bool debug(struct rt_env *rt)
@@ -113,15 +114,27 @@ static bool API_loadTexture(struct rt_env *rt)
 {
 	const char *file;
 	int tex_id;
-	struct rt_value ret;
+	int tex_width;
+	int tex_height;
+	struct rt_value ret, ival;
 
 	if (!get_string_param(rt, "file", &file))
 		return false;
 
-	if (!load_texture(file, &tex_id))
+	if (!load_texture(file, &tex_id, &tex_width, &tex_height))
 		return false;
 
-	rt_make_int(&ret, tex_id);
+	if (!rt_make_empty_dict(rt, &ret))
+		return false;
+	rt_make_int(&ival, tex_id);
+	if (!rt_set_dict_elem(rt, &ret, "id", &ival))
+		return false;
+	rt_make_int(&ival, tex_width);
+	if (!rt_set_dict_elem(rt, &ret, "width", &ival))
+		return false;
+	rt_make_int(&ival, tex_height);
+	if (!rt_set_dict_elem(rt, &ret, "height", &ival))
+		return false;
 	if (!rt_set_return(rt, &ret))
 		return false;
 
@@ -150,7 +163,7 @@ static bool API_renderTexture(struct rt_env *rt)
 		return false;
 	if (!get_int_param(rt, "dstHeight", &dst_height))
 		return false;
-	if (!get_int_param(rt, "texId", &tex_id))
+	if (!get_dict_elem_int_param(rt, "texture", "id", &tex_id))
 		return false;
 	if (!get_int_param(rt, "srcLeft", &src_left))
 		return false;
@@ -269,6 +282,33 @@ static bool get_string_param(struct rt_env *rt, const char *name, const char **r
 		rt_error(rt, "Unexpected parameter value for %s.", name);
 		return false;
 	}
+
+	return true;
+}
+
+/* Get an integer parameter. */
+static bool get_dict_elem_int_param(struct rt_env *rt, const char *name, const char *key, int *ret)
+{
+	struct rt_value param, elem, ival;
+
+	if (!rt_get_arg(rt, 0, &param))
+		return false;
+
+	if (!rt_get_dict_elem(rt, &param, name, &elem))
+		return false;
+	if (elem.type != RT_VALUE_DICT) {
+		rt_error(rt, "Unexpected parameter value for %s.", name);
+		return false;
+	}
+
+	if (!rt_get_dict_elem(rt, &elem, key, &ival))
+		return false;
+	if (ival.type != RT_VALUE_INT) {
+		rt_error(rt, "Unexpected parameter value for %s.", name);
+		return false;
+	}
+
+	*ret = ival.val.i;
 
 	return true;
 }

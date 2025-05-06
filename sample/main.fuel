@@ -12,27 +12,33 @@ func setup() {
 
 func start() {
     // This function is called when the app wants to start a game.
-    // Please do initializations here.
+    // Please do initialization here.
 
     // Load a texture.
-    App.tex1 = API.loadTexture({file: "images/apple.png"});
+    var tex = API.loadTexture({file: "images/apple.png"});
+
+    // Store to the app storage.
+    App.tex1 = tex;
 }
 
 func frame() {
     // This function is called every frame.
     // Please do a rendering here.
 
+    // Get a texture.
+    var tex = App.tex1;
+
     // Render.
     API.renderTexture({
 	dstLeft:   API.mousePosX,
 	dstTop:    API.mousePosY,
-	dstWidth:  482,
-	dstHeight: 414,
-	texId:     App.tex1,
+	dstWidth:  tex.width,
+	dstHeight: tex.height,
+	texture:   tex,
 	srcLeft:   0,
 	srcTop:    0,
-	srcWidth:  482,
-	srcHeight: 414,
-	alpha: 255
+	srcWidth:  tex.width,
+	srcHeight: tex.height,
+	alpha:     255
     });
 }

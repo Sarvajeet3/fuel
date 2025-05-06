@@ -9,7 +9,7 @@
 
 #include "compat.h"
 
-bool load_texture(const char *fname, int *ret);
+bool load_texture(const char *fname, int *ret, int *width, int *height);
 void render_texture(int dst_left, int dst_top, int dst_width, int dst_height,
 		    int tex_id, int src_x, int src_y, int src_width,
 		    int src_height, int alpha);

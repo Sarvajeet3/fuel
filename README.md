@@ -1,9 +1,11 @@
 Fuel
 ====
 
-A 2D game engine that runs on [any computer.](docs/porting.md)
+`Fuel` is a minimal C89 game engine with multi-arch JIT,
+hardware-accelerated rendering backends, and platform-native audio
+pipelines — built for production deployment.
 
-Dreams fuel it — and they're the only requirement.
+It runs on [any post-2000 computer.](docs/porting.md)
 
 ---
 
@@ -15,51 +17,76 @@ Dreams fuel it — and they're the only requirement.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
 * **Jot & Run** — No boilerplates. Jot down an idea, and it comes alive.
 * **Lightweight** — Runs even on small or older machines.
-* **Ultra Fast** — Built-in JIT brings unbelievable power to your games.
-* **Go Far, Stay Close** — Build for platforms you don't own. Share from wherever you are, with whomever you wish.
+* **Ultra Fast** — Built-in JIT compiler brings ultra speed into your code.
+* **Go Far, Stay Close** — Build for platforms you don't own.
+
+---
+
+## 🧪 Example
+
+Here's a [simple sample](sample/main.fuel) showing how to display an
+image at the mouse position.
 
 ---
 
 ## What's Fuel?
 
-Fuel is a lightweight and flexible game engine, made to support
+Fuel is a lightweight and flexible game engine, designed to support
 creators across desktop, mobile, and console platforms.
 
-It works gently even on older or low-spec computers — if you have a
+It runs smoothly even on older or low-spec machines — if you have a
 computer, there's a place for you to create. 💻🌱
 
-And if you're using something more powerful, like a modern iPhone,
-Fuel adapts to draw out the full capabilities of your device. 🎮📱
+And if you're using something more powerful, like a modern MacBook or
+iPhone, Fuel adapts to draw out the full capabilities of your
+device. 🎮📱
 
-You don't need to own the latest hardware — Fuel helps you reach
-beyond your environment, making it a helpful companion for creators
-everywhere, including those in places with fewer resources.
+You don't need the latest hardware. Fuel helps you go beyond your
+environment. It's a helpful companion for creators everywhere —
+especially in places with fewer resources.
 
-Create at your pace, wherever you are. 🌍✨
+Create at your pace, wherever you are in the world. 🌍✨
 
 ---
 
-## Why Fuel?
+## Technical Overview
 
-Fuel is for those who quietly hold a dream, and wish to share it, one
-small step at a time.
+### Core Architecture
 
-Creativity shouldn't depend on the power of your computer, where you
-live, or what tools you have.
+* **Engine Core**: Written in C89, portable and dependency-free.
+* **Scripting**: Uses `FuelLang`, a custom language designed for clarity and fast execution.
+* **JIT Compilation**: Built-in JIT for many architectures, with optional AOT for mobile platforms.
+* **Rendering**: Supports DirectX 9/11/12, Metal, OpenGL, and a fallback software renderer.
+* **Audio**: Lightweight backend supporting DirectSound, Audio Unit, ALSA, and others.
+* **Small Footprint**: Runtime is less than 2MB.
 
-Fuel was created with the hope that every creator deserves space to
-explore, no matter their surroundings.
+### Platform Support
 
-Whether you're using a Raspberry Pi or a high-end PC, Fuel offers
-gentle tools to help bring your ideas to life — in a way that feels
-simple, thoughtful, and yours.
+|Platform Type  |OS / Platform       |Notes                                     |
+|---------------|--------------------|------------------------------------------|
+|Desktop        |Windows             |Supports DirectX                          |
+|               |macOS               |Supports Metal                            |
+|               |Linux               |Supports OpenGL                           |
+|               |FreeBSD             |Supports OpenGL                           |
+|Mobile         |iOS                 |Source export for Xcode projects          |
+|               |Android             |Source export for Android Studio projects |
+|Console        |Nintendo Switch™   |NDA license required                      |
+|               |PlayStation® 5     |NDA license required                      |
+|               |Xbox Series X\|S    |NDA license required                      |
+|Web            |WebAssembly         |Supports WebGL                            |
 
-You don't need to go fast or be loud.  If you have something to make,
-Fuel will be here to walk with you.
+### FuelLang
+
+`FuelLang` is a lightweight scripting language designed specifically
+for Fuel. With its game-oriented syntax, it emphasizes clarity, fast
+startup, and seamless integration with the engine.
+
+Built-in JIT compiler supports multiple architectures:
+**x86, x86_64, Arm32, Arm64, PowerPC 32, PowerPC 64, MIPS32, and MIPS64.**
 
 ---
 
@@ -94,11 +121,31 @@ To request access, please contact the author with proof of your platform NDA sta
 
 ---
 
+## Why Fuel?
+
+Fuel is for those who quietly hold a dream, and wish to share it, one
+small step at a time.
+
+Creativity shouldn't depend on the power of your computer, where you
+live, or what tools you have.
+
+Fuel was created with the hope that every creator deserves space to
+explore, no matter their surroundings.
+
+Whether you're using a Raspberry Pi in a classroom, or using a
+UN-issued Chromebook in a temporary shelter, Fuel offers gentle tools
+to help bring your ideas to life — in a way that feels simple,
+thoughtful, and yours. If you have something to make, Fuel will be
+here to walk with you.
+
+Dreams fuel it — and they're the only requirement.
+
+---
+
 ## 🤝 Join Us
 
-Fuel is still in its early stages.
-We're building a game engine with care, hoping it will inspire and
-empower creators around the world.
+Fuel is still in its early stages. We're building a game engine with
+care, hoping it will inspire and empower creators around the world.
 
 If you're interested in contributing — whether it's code,
 documentation, testing, or ideas — we'd be happy to have you with us.
@@ -112,8 +159,11 @@ join us on this journey.
 
 ## About the Author
 
-Awe [aːwe] is a programmer living alone in a small house,
-surrounded by fields. They love writing code — it feels simple and
-clear. But understanding people's feelings takes time.
+Awe [aːwe] is a programmer living alone in a small house, surrounded
+by fields. They love writing code — it feels simple and clear.
+Understanding people's feelings takes time, but tools can be kind.
 
-This software is Awe's small universe. Thank you for visiting.
+This software is Awe's small universe. Thank you for visiting. And
+thank you for receiving their seasoned craftsmanship.
+
+Please use this dream-fueled engine with confidence.
