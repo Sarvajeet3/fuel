@@ -35,11 +35,13 @@ Porting Status
 
 ### Linux
 
-|System                           |Tested |2D |3D |Sound |Description                    |
-|---------------------------------|-------|---|---|------|-------------------------------|
-|Ubuntu 24.04 LTS (OpenGL)        |v      |v  |v  |v     |                               |
-|Ubuntu 24.04 LTS (fbdev)         |v      |v  |   |v     |                               |
-|Raspberry Pi OS (OpenGL)         |v      |v  |v  |v     |                               |
+|System                             |Tested |2D |3D |Sound |Description                    |
+|-----------------------------------|-------|---|---|------|-------------------------------|
+|Ubuntu 24.04 LTS Desktop (OpenGL)  |v      |v  |v  |v     |                               |
+|Ubuntu 24.04 LTS Server (fbdev)    |v      |v  |   |v     |                               |
+|Debian 12 (OpenGL)                 |v      |v  |   |v     |                               |
+|Fedora 40 (OpenGL)                 |v      |v  |v  |v     |                               |
+|Raspberry Pi OS (OpenGL)           |v      |v  |v  |v     |                               |
 
 ### iOS and Variants
 
@@ -94,6 +96,7 @@ Porting Status
 |Solaris 10            |       |v  |   |v     |                               |
 |AIX                   |       |v  |   |      |Generic POSIX port             |
 |HP-UX                 |       |v  |   |      |Generic POSIX port             |
+|Darwin                |v      |v  |   |      |Generic POSIX port             |
 
 ### Niche
 
