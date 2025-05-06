@@ -1,9 +1,9 @@
 CC=cc
-CPPFLAGS=
+CPPFLAGS=\
+	-I../../src
 CFLAGS=\
 	-O2 \
 	-g0 \
-	-I../../src
 
 all: fuel
 

@@ -59,7 +59,7 @@ cd build/pack-cli && make clean && make fuelpack CC=clang CPPFLAGS="-I../../src"
 cp build/pack-cli/fuelpack fuel-$VERSION/macos/fuelpack
 
 # fuel
-cd build/fuel-cli && make clean && make fuel CC=clang CPPFLAGS="-DUSE_BINDIST" CFLAGS="-O2 -g0 -arch arm64 -arch x86_64 -isysroot `xcrun --sdk macosx --show-sdk-path`" && cd ../..
+cd build/fuel-cli && make clean && make fuel CC=clang CPPFLAGS="-I../../src -DUSE_BINDIST" CFLAGS="-O2 -g0 -arch arm64 -arch x86_64 -isysroot `xcrun --sdk macosx --show-sdk-path`" && cd ../..
 cp build/fuel-cli/fuel fuel-$VERSION/macos/fuel
 
 #
