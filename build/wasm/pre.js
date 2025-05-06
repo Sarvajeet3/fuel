@@ -1,3 +1,3 @@
 Module['preRun'] = function () {
-    FS.createPreloadedFile('/', 'game.dat', 'game.dat', true, false);
+    FS.createPreloadedFile('/', 'fuel.tank', 'fuel.tank', true, false);
 };

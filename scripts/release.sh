@@ -35,7 +35,7 @@ cd build/pack-cli && make clean && make CC=i686-w64-mingw32-gcc fuelpack.exe && 
 cp build/pack-cli/fuelpack.exe fuel-$VERSION/windows/fuelpack.exe
 
 # fuel.exe
-cd build/fuel-cli && make clean && make CC=i686-w64-mingw32-gcc CPPFLAGS=-DUSE_BINDIST fuel.exe && cd ../..
+cd build/fuel-cli && make clean && make CC=i686-w64-mingw32-gcc CPPFLAGS="-I../../src -DUSE_BINDIST" fuel.exe && cd ../..
 cp build/fuel-cli/fuel.exe fuel-$VERSION/windows/fuel.exe
 
 #
@@ -74,7 +74,7 @@ cd build/linux && make clean && cd ../..
 docker run --rm -it -v "$PWD":/src -w /src/build/linux ubuntu18-x86_64 make
 docker run --rm -it -v "$PWD":/src -w /src/build/lang-cli ubuntu18-x86_64 make
 docker run --rm -it -v "$PWD":/src -w /src/build/pack-cli ubuntu18-x86_64 make
-docker run --rm -it -v "$PWD":/src -w /src/build/fuel-cli ubuntu18-x86_64 make CPPFLAGS=-DUSE_BINDIST
+docker run --rm -it -v "$PWD":/src -w /src/build/fuel-cli ubuntu18-x86_64 make CPPFLAGS="-I../../src -DUSE_BINDIST"
 cp build/linux/fuelcore fuel-$VERSION/linux-x86_64/fuelcore
 cp build/lang-cli/fuellang fuel-$VERSION/linux-x86_64/fuellang
 cp build/pack-cli/fuelpack fuel-$VERSION/linux-x86_64/fuelpack
@@ -92,7 +92,7 @@ cd build/linux && make clean && cd ../..
 docker run --rm -it -v "$PWD":/src -w /src/build/linux ubuntu18-arm64 make
 docker run --rm -it -v "$PWD":/src -w /src/build/lang-cli ubuntu18-arm64 make
 docker run --rm -it -v "$PWD":/src -w /src/build/pack-cli ubuntu18-arm64 make
-docker run --rm -it -v "$PWD":/src -w /src/build/fuel-cli ubuntu18-arm64 make CPPFLAGS=-DUSE_BINDIST
+docker run --rm -it -v "$PWD":/src -w /src/build/fuel-cli ubuntu18-arm64 make CPPFLAGS="-I../../src -DUSE_BINDIST"
 cp build/linux/fuelcore fuel-$VERSION/linux-arm64/fuelcore
 cp build/lang-cli/fuellang fuel-$VERSION/linux-arm64/fuellang
 cp build/pack-cli/fuelpack fuel-$VERSION/linux-arm64/fuelpack
@@ -119,6 +119,19 @@ mkdir -p fuel-$VERSION/projects
 
 cd build/android && make src && cd ../..
 cp -R build/android/android-src fuel-$VERSION/projects/android
+
+#
+# Wasm
+#
+
+echo "Building for Wasm..."
+
+mkdir -p fuel-$VERSION/projects/web
+
+cd build/wasm && make && cd ../..
+cp build/wasm/index.html fuel-$VERSION/projects/web/
+cp build/wasm/index.js fuel-$VERSION/projects/web/
+cp build/wasm/index.wasm fuel-$VERSION/projects/web/
 
 #
 # Sample
