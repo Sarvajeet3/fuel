@@ -253,7 +253,7 @@ fi
 # For generic POSIX
 if [ "$HOST" = "posix" ]; then
     set -eu
-    echo 'Configuring for Solaris...'
+    echo 'Configuring for POSIX...'
     sed -e "s|^BUILDDIR=.*$|BUILDDIR=build/posix|g" \
         -e "s|^TARGET=.*$|TARGET=fuel|g" \
         -e "s|^CC=.*$|CC=cc|g" \
