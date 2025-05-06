@@ -1,12 +1,15 @@
 Fuel
 ====
 
-A dream-fueled game engine that runs on [any computer.](docs/porting.md)
+A 2D game engine that runs on [any computer.](docs/porting.md)
+
+Dreams fuel it — and they're the only requirement.
 
 ---
 
 ## Quick Start
 
+* [Downloads](https://github.com/awemorris/fuel/releases)
 * [Getting Started](docs/gettingstarted.md)
 * [Documentation](docs/index.md)
 
@@ -14,12 +17,10 @@ A dream-fueled game engine that runs on [any computer.](docs/porting.md)
 
 ## ✨ Features
 
-* **Idea to Life** — Jot down an idea, and it comes alive. Fuel lets your thoughts move and breathe with ease.
-* **Lightweight & Quiet** — Fuel runs gently, even on small or older machines. It never asks for more than it needs.
-* **Peaceful Speed** — Built-in JIT and C translation bring quiet power to your games, without noise or clutter.
+* **Jot & Run** — No boilerplates. Jot down an idea, and it comes alive.
+* **Lightweight** — Runs even on small or older machines.
+* **Ultra Fast** — Built-in JIT brings unbelievable power to your games.
 * **Go Far, Stay Close** — Build for platforms you don't own. Share from wherever you are, with whomever you wish.
-
-Dreams are fuel, and talents are spark to ignite this engine.
 
 ---
 
@@ -29,7 +30,7 @@ Fuel is a lightweight and flexible game engine, made to support
 creators across desktop, mobile, and console platforms.
 
 It works gently even on older or low-spec computers — if you have a
-PC, there's a place for you to create. 💻🌱
+computer, there's a place for you to create. 💻🌱
 
 And if you're using something more powerful, like a modern iPhone,
 Fuel adapts to draw out the full capabilities of your device. 🎮📱
@@ -62,19 +63,20 @@ Fuel will be here to walk with you.
 
 ---
 
-## Fuel License Overview
+## License Overview
 
-### Open Source Repository
+Fuel uses dual-licensing.
+
+### Open Source License
 
 Fuel is available as open-source software under the MIT License.
 You're free to use, modify, and share it — even in commercial projects.
 Please see the [LICENSE](LICENSE) file in the repository for full details.
 
-Support is provided on a best-effort, community-driven basis. If you
-require guaranteed support or commercial terms, please contact the
-author to discuss a license agreement.
+Support is provided on a best-effort, community-driven basis.
+If you require guaranteed support, please contact the author to discuss an agreement.
 
-### Commercial License
+### Commercial Console License
 
 On commercial game platforms such as Nintendo Switch™, PlayStation® 5,
 and Xbox Series X|S, the terms of each platform's SDK agreement may
@@ -110,7 +112,7 @@ join us on this journey.
 
 ## About the Author
 
-`Awe Morris` is a programmer living alone in a small house,
+Awe [aːwe] is a programmer living alone in a small house,
 surrounded by fields. They love writing code — it feels simple and
 clear. But understanding people's feelings takes time.
 
