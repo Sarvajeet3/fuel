@@ -305,6 +305,8 @@
     <ClCompile Include="..\..\src\platform\wave.c" />
     <ClCompile Include="..\..\src\platform\winmain.c" />
     <ClCompile Include="..\..\src\render.c" />
+    <ClCompile Include="..\..\src\sound.c" />
+    <ClCompile Include="..\..\src\font.c" />
     <ClCompile Include="..\..\src\tag.c" />
     <ClCompile Include="..\..\src\translation.c" />
     <ClCompile Include="..\..\src\vm.c" />

@@ -26,6 +26,8 @@
 #include "tag.h"
 #include "vm.h"
 #include "render.h"
+#include "sound.h"
+#include "font.h"
 
 /* Standard C */
 #include <stdio.h>

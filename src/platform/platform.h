@@ -324,15 +324,7 @@ bool draw_glyph(struct image *img,
  *********/
 
 /* Sound Tracks */
-#define SOUND_BGM1	(0)
-#define SOUND_BGM2	(1)
-#define SOUND_SE1	(2)
-#define SOUND_SE2	(3)
-#define SOUND_CV1	(4)
-#define SOUND_CV2	(5)
-#define SOUND_SYS1	(6)
-#define SOUND_SYS2	(7)
-#define SOUND_TRACKS	(8)
+#define SOUND_TRACKS	(4)
 
 /* PCM Stream */
 struct wave;

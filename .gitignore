@@ -3,7 +3,7 @@
 #*
 .DS_Store
 
-build/linux/fuel
+build/linux/fuelcore
 build/linux/objs/
 build/linux/libroot/
 
@@ -17,17 +17,17 @@ build/macos/build/
 build/macos/libroot-arm64/
 build/macos/libroot-x86_64/
 
-build/win32/fuel.exe
+build/win32/fuelcore.exe
 build/win32/objs/
 build/win32/libroot/
 build/win32/dx12headers/
 
-build/win64/fuel64.exe
+build/win64/fuelcore-64.exe
 build/win64/objs/
 build/win64/libroot/
 build/win64/dx12headers/
 
-build/winarm64/fuelarm64.exe
+build/winarm64/fuelcore-arm64.exe
 build/winarm64/objs/
 build/winarm64/libroot/
 build/winarm64/dx12headers/
@@ -68,9 +68,14 @@ build/android/ndk/
 build/cli/fuelc
 build/cli/objs
 
-build/posix/fuel
+build/posix/fuelcore
 build/posix/libroot/
 build/posix/objs/
+
+build/wasm/index.html
+build/wasm/index.js
+build/wasm/index.wasm
+build/wasm/libwebp-1.3.2/
 
 build/fbdev/fuel
 build/fbdev/libroot/
@@ -78,3 +83,7 @@ build/fbdev/objs/
 
 build/lang-cli/fuellang
 build/lang-cli/objs
+
+build/fuel-cli/fuel
+
+build/pack-cli/fuelpack

@@ -60,6 +60,8 @@ libfuel.dll: $(SRCS)
 		../../src/tag.c \
 		../../src/vm.c \
 		../../src/render.c \
+		../../src/sound.c \
+		../../src/font.c \
 		../../src/main.c \
 		./libroot/lib/libfreetype.a \
 		./libroot/lib/libpng.a \

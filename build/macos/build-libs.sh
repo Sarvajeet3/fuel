@@ -64,6 +64,8 @@ MACOSX_DEPLOYMENT_TARGET=10.13 clang \
     ../../../src/vm.c \
     ../../../src/common.c \
     ../../../src/render.c \
+    ../../../src/sound.c \
+    ../../../src/font.c \
     ../../../src/translation.c
 ar rcs ../libroot-arm64/lib/libfuel.a *.o
 cd ..
@@ -129,6 +131,8 @@ MACOSX_DEPLOYMENT_TARGET=10.13 clang \
     ../../../src/vm.c \
     ../../../src/common.c \
     ../../../src/render.c \
+    ../../../src/sound.c \
+    ../../../src/font.c \
     ../../../src/translation.c
 ar rcs ../libroot-x86_64/lib/libfuel.a *.o
 cd ..

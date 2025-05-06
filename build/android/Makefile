@@ -21,6 +21,8 @@ SRCS=\
     ../../src/vm.c \
     ../../src/common.c \
     ../../src/render.c \
+    ../../src/sound.c \
+    ../../src/font.c \
     ../../src/translation.c
 
 src: libfuel-aarch64.so libfuel-armv7a.so libfuel-x86_64.so libfuel-i686.so

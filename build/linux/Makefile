@@ -83,6 +83,8 @@ OBJS_ENGINE=\
 	objs/tag.o \
 	objs/vm.o \
 	objs/render.o \
+	objs/sound.o \
+	objs/font.o \
 	objs/main.o
 
 OBJS_TOP=\
@@ -246,6 +248,14 @@ objs/vm.o: ../../src/vm.c
 	$(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
 
 objs/render.o: ../../src/render.c
+	@mkdir -p objs
+	$(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
+
+objs/sound.o: ../../src/sound.c
+	@mkdir -p objs
+	$(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
+
+objs/font.o: ../../src/font.c
 	@mkdir -p objs
 	$(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
 

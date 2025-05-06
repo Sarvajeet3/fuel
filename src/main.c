@@ -47,6 +47,9 @@ bool on_event_frame(void)
 {
 	call_vm_raw_function("frame");
 
+	set_vm_int("isMouseLeftPressed", 0);
+	set_vm_int("isMouseRightPressed", 0);
+
 	/* Continue the game loop. */
 	return true;
 }

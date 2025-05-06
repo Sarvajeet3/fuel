@@ -60,6 +60,8 @@ IPHONEOS_DEPLOYMENT_TARGET=13.0 clang \
     ../../../src/vm.c \
     ../../../src/common.c \
     ../../../src/render.c \
+    ../../../src/sound.c \
+    ../../../src/font.c \
     ../../../src/translation.c
 
 ar x ../libroot-device/lib/libpng.a
@@ -130,6 +132,8 @@ IPHONEOS_DEPLOYMENT_TARGET=13.0 clang \
     ../../../src/vm.c \
     ../../../src/common.c \
     ../../../src/render.c \
+    ../../../src/sound.c \
+    ../../../src/font.c \
     ../../../src/translation.c
 ar x ../libroot-sim-arm64/lib/libpng.a
 ar x ../libroot-sim-arm64/lib/libjpeg.a
@@ -199,6 +203,8 @@ IPHONEOS_DEPLOYMENT_TARGET=13.0 clang \
     ../../../src/vm.c \
     ../../../src/common.c \
     ../../../src/render.c \
+    ../../../src/sound.c \
+    ../../../src/font.c \
     ../../../src/translation.c
 ar x ../libroot-sim-x86_64/lib/libpng.a
 ar x ../libroot-sim-x86_64/lib/libjpeg.a

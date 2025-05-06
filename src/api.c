@@ -190,6 +190,47 @@ static bool API_renderTexture(struct rt_env *rt)
 	return true;
 }
 
+/* API.playSound() */
+static bool API_playSound(struct rt_env *rt)
+{
+	int stream;
+	const char *file;
+	struct rt_value ret;
+
+	if (!get_int_param(rt, "stream", &stream))
+		return false;
+	if (!get_string_param(rt, "file", &file))
+		return false;
+
+	if (!play_sound_stream(stream, file))
+		return false;
+
+	rt_make_int(&ret, 1);
+	if (!rt_set_return(rt, &ret))
+		return false;
+
+	return true;
+}
+
+/* API.stopSound() */
+static bool API_stopSound(struct rt_env *rt)
+{
+	int stream;
+	struct rt_value ret;
+
+	if (!get_int_param(rt, "stream", &stream))
+		return false;
+
+	if (!stop_sound_stream(stream))
+		return false;
+
+	rt_make_int(&ret, 1);
+	if (!rt_set_return(rt, &ret))
+		return false;
+
+	return true;
+}
+
 /*
  * Helpers
  */
@@ -335,6 +376,8 @@ bool install_api(struct rt_env *rt)
 		RTFUNC(callTagFunction),
 		RTFUNC(loadTexture),
 		RTFUNC(renderTexture),
+		RTFUNC(playSound),
+		RTFUNC(stopSound),
 	};
 	const int tbl_size = sizeof(funcs) / sizeof(struct func);
 	struct rt_value dict;
