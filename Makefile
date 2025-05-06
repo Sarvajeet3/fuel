@@ -27,3 +27,10 @@ install:
 
 doc:
 	mkdocs build
+
+clean:
+	@cd build/lang-cli && make clean
+	@cd build/pack-cli && make clean
+	@cd build/fuel-cli && make clean
+	@cd $(BUILDDIR) && make clean
+	@rm -rf site

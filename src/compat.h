@@ -50,31 +50,41 @@
 /* Linux (non-Android) */
 #if defined(__linux) && !defined(__ANDROID__)
 #define TARGET_LINUX
+#ifndef TARGET_POSIX
 #define TARGET_POSIX
+#endif
 #endif
 
 /* FreeBSD */
 #if defined(__FreeBSD__)
 #define TARGET_FREEBSD
+#ifndef TARGET_POSIX
 #define TARGET_POSIX
+#endif
 #endif
 
 /* NetBSD */
 #if defined(__NetBSD__)
 #define TARGET_FREEBSD
+#ifndef TARGET_POSIX
 #define TARGET_POSIX
+#endif
 #endif
 
 /* OpenBSD */
 #if defined(__OpenBSD__)
 #define TARGET_OPENBSD
+#ifndef TARGET_POSIX
 #define TARGET_POSIX
+#endif
 #endif
 
 /* Solaris */
 #if defined(__sun)
 #define TARGET_SOLARIS
+#ifndef TARGET_POSIX
 #define TARGET_POSIX
+#endif
 #endif
 
 /* Android */
