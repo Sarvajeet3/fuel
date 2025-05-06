@@ -37,7 +37,7 @@ Fuel comes with sample files to help you get started.
 Copy the contents of the sample folder into your new game directory:
 
 ```
-cp -r /path/to/fuel/sample/* .
+cp -R /path/to/fuel/sample/* .
 ```
 
 ## 5. Run the Game

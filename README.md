@@ -31,9 +31,8 @@ creators across desktop, mobile, and console platforms.
 It works gently even on older or low-spec computers — if you have a
 PC, there's a place for you to create. 💻🌱
 
-And if you're using something more powerful, like a modern iPhone or
-game console, Fuel can quietly bring out the full potential of your
-device. 🎮📱
+And if you're using something more powerful, like a modern iPhone,
+Fuel adapts to draw out the full capabilities of your device. 🎮📱
 
 You don't need to own the latest hardware — Fuel helps you reach
 beyond your environment, making it a helpful companion for creators
@@ -95,9 +94,9 @@ To request access, please contact the author with proof of your platform NDA sta
 
 ## 🤝 Join Us
 
-Fuel is still at a very early stage. We're quietly building a game
-engine that we hope will inspire and empower creators around the
-world.
+Fuel is still in its early stages.
+We're building a game engine with care, hoping it will inspire and
+empower creators around the world.
 
 If you're interested in contributing — whether it's code,
 documentation, testing, or ideas — we'd be happy to have you with us.
@@ -111,8 +110,8 @@ join us on this journey.
 
 ## About the Author
 
-`Awe Morris` is a quiet programmer living alone in a small house,
+`Awe Morris` is a programmer living alone in a small house,
 surrounded by fields. They love writing code — it feels simple and
-clear. But understanding people's feelings can take time.
+clear. But understanding people's feelings takes time.
 
 This software is Awe's small universe. Thank you for visiting.
