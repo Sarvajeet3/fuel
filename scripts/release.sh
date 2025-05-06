@@ -138,8 +138,10 @@ cp build/wasm/index.wasm fuel-$VERSION/projects/web/
 #
 
 mkdir -p fuel-$VERSION/sample
-cp sample/apple.png fuel-$VERSION/sample/
+mkdir -p fuel-$VERSION/sample/images
+
 cp sample/main.fuel fuel-$VERSION/sample/
+cp sample/images/apple.png fuel-$VERSION/sample/images/
 
 #
 # Documentation

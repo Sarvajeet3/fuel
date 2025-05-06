@@ -15,7 +15,7 @@ func start() {
     // Please do initializations here.
 
     // Load a texture.
-    App.tex1 = API.loadTexture({file: "apple.png"});
+    App.tex1 = API.loadTexture({file: "images/apple.png"});
 }
 
 func frame() {
