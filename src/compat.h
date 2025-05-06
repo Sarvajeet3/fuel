@@ -166,15 +166,8 @@
 #define strlcat(d, s, l)		strcat_s(d, l, s)
 #endif
 #if defined(TARGET_LINUX) && !(defined(__GLIBC__) && (__GLIBC__ >= 2 && __GLIBC_MINOR__ >= 38))
-#include <string.h>
-inline void strlcpy(char *d, const char *s, size_t l) {
-	strncpy(d, s, l - 1);
-	d[l - 1] = '\0';
-}
-inline void strlcat(char *d, const char *s, size_t l) {
-	strncat(d, s, l - 1);
-	d[l - 1] = '\0';
-}
+#define strlcpy(d, s, l)		strcpy(d, s)
+#define strlcat(d, s, l)		strcat(d, s)
 #endif
 
 #endif /* End of GCC/Clang */
