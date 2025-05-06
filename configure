@@ -36,7 +36,7 @@ if [ -z "$HOST" ]; then
             ;;
 	Darwin)
 	    echo 'Detected a macOS host.'
-	    echo 'Use generic POSIX configuration, not a mac app.'
+	    echo 'Use the generic POSIX configuration, not a Mac app.'
 	    HOST=posix
             ;;
         FreeBSD)
@@ -150,8 +150,8 @@ if [ "$HOST" = "freebsd" ]; then
 	mv Makefile.new Makefile
     echo ''
     echo 'Searching for toolchain...'
-    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
-    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
     echo ''
     echo 'Configured for FreeBSD. Run make.'
     echo ''
@@ -173,8 +173,8 @@ if [ "$HOST" = "netbsd" ]; then
 	mv Makefile.new Makefile
     echo ''
     echo 'Searching for toolchain...'
-    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
-    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
     echo ''
     echo 'Configured for NetBSD. Run make.'
     echo ''
@@ -196,8 +196,8 @@ if [ "$HOST" = "openbsd" ]; then
 	mv Makefile.new Makefile
     echo ''
     echo 'Searching for toolchain...'
-    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
-    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
     echo ''
     echo 'Configured for OpenBSD. Run make.'
     echo ''
@@ -219,8 +219,8 @@ if [ "$HOST" = "solaris" ]; then
 	mv Makefile.new Makefile
     echo ''
     echo 'Searching for toolchain...'
-    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
-    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
     echo ''
     echo 'Configured for Solaris. Run make.'
     echo ''
@@ -265,8 +265,8 @@ if [ "$HOST" = "posix" ]; then
 	mv Makefile.new Makefile
     echo ''
     echo 'Searching for toolchain...'
-    echo -n '  cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
-    echo -n '  ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'cc ... ' && if [ ! -f "`which cc`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
+    echo 'ar ... ' && if [ ! -f "`which ar`" ]; then echo 'not found'; exit 1; fi && echo 'ok'
     echo ''
     echo 'Configured for generix POSIX. Run make.'
     echo ''
