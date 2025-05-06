@@ -170,6 +170,7 @@ public:
 		FuelWindow *window = new FuelWindow(window_title, window_width, window_height);
 		window->Show();
 
+#if 0
 		media_raw_audio_format format = {
 			44100.0, 2, media_raw_audio_format::B_AUDIO_SHORT, B_MEDIA_LITTLE_ENDIAN, 4
 		};
@@ -177,6 +178,7 @@ public:
 			sound_player[i] = new BSoundPlayer(&format, "SoundPlayer", fill_buffer, NULL, (void*)(intptr_t)i);
 			sound_player[i]->Start();
 		}
+#endif
 
 		if (!on_event_start())
 			exit(1);
