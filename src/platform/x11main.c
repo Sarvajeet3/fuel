@@ -807,7 +807,7 @@ char *make_real_path(const char *fname)
 	}
 
 	/* Copy as is. */
-	strlcpy(buf, fname, len - 1);
+	strlcpy(buf, fname, len);
 
 	return buf;
 }

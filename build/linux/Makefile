@@ -11,8 +11,8 @@ CPPFLAGS=\
 	-I./libroot/include
 
 CFLAGS=\
-	-O2 \
-	-g0 \
+	-O0 \
+	-g3 \
 	-ffast-math \
 	-ftree-vectorize \
 	-std=gnu11 \
@@ -272,4 +272,4 @@ setup:
 	sudo apt-get update && sudo apt-get install -y build-essential libx11-dev libxpm-dev mesa-common-dev libasound2-dev
 
 clean:
-	rm -rf libroot objs fuel
+	rm -rf libroot objs fuelcore
