@@ -161,7 +161,6 @@ tar czf fuel-$VERSION.tar.gz fuel-$VERSION
 # Upload
 #
 
-#yes '' | gh release create "$VERSION" --title "$VERSION" --notes "" fuel-$VERSION.zip fuel-$VERSION.tar.gz
+yes '' | gh release create "$VERSION" --title "$VERSION" --notes "" fuel-$VERSION.zip fuel-$VERSION.tar.gz
 
-#rm -rf fuel-$VERSION fuel-$VERSION.zip fuel-$VERSION.tar.gz
-rm -rf fuel-$VERSION.zip fuel-$VERSION.tar.gz
+rm -rf fuel-$VERSION fuel-$VERSION.zip fuel-$VERSION.tar.gz
