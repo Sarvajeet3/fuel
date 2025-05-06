@@ -10,7 +10,7 @@ WINDRES=windres
 build-all:
 	@cd build/lang-cli && make "fuellang$(TARGET_POSTFIX)" CC=$(CC) CXX=$(CXX) AR=$(AR) STRIP=$(STRIP) WINDRES=$(WINDRES)
 	@cd build/pack-cli && make "fuelpack$(TARGET_POSTFIX)" CC=$(CC) CXX=$(CXX) AR=$(AR) STRIP=$(STRIP) WINDRES=$(WINDRES)
-	@cd build/fuel-cli && make "fuel$(TARGET_POSTFIX)" CC=$(CC) CXX=$(CXX) AR=$(AR) STRIP=$(STRIP) WINDRES=$(WINDRES)
+	@cd build/fuel-cli && make "fuel$(TARGET_POSTFIX)" CC=$(CC) CXX=$(CXX) AR=$(AR) STRIP=$(STRIP) WINDRES=$(WINDRES) CPPFLAGS="-DTARGET_POSIX -I../../src"
 	@cd $(BUILDDIR) && make "fuelcore$(TARGET_POSTFIX)" CC=$(CC) CXX=$(CXX) AR=$(AR) STRIP=$(STRIP) WINDRES=$(WINDRES)
 
 install:

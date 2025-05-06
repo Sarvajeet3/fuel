@@ -30,7 +30,7 @@ const char main_fuel_text[] =
 	"    return {\n"
 	"        title: \"My Game\",\n"
 	"        width: 640,\n"
-	"        height: 480,\n"
+	"        height: 480\n"
 	"    };\n"
 	"}\n"
 	"\n"
@@ -187,7 +187,7 @@ int command_run(int argc, char *argv[])
 		return 1;
 	}
 
-#if defined(TARGET_MACOS)
+#if defined(TARGET_MACOS) && !defined(TARGET_POSIX)
 	/* For macOS. */
 	if (!check_dir_exist(".FuelCore.app")) {
 		strncpy(cmd, "hdiutil attach ", BUF_SIZE);
