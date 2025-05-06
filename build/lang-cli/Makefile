@@ -134,11 +134,11 @@ objs/translation.o: ../../src/translation.c
 	@mkdir -p objs
 	$(CC) -c -o objs/translation.o $(CPPFLAGS) $(CFLAGS) ../../src/translation.c
 
-../../src/lang/lexer.yy.c: ../../src/lang/lexer.l
-	$(LEX) -o ../../src/lang/lexer.yy.c --prefix=ast_yy ../../src/lang/lexer.l
-
-../../src/lang/parser.tab.c: ../../src/lang/parser.y
-	$(YACC) -Wcounterexamples -d -p ast_yy -o ../../src/lang/parser.tab.c ../../src/lang/parser.y
+#../../src/lang/lexer.yy.c: ../../src/lang/lexer.l
+#	$(LEX) -o ../../src/lang/lexer.yy.c --prefix=ast_yy ../../src/lang/lexer.l
+#
+#../../src/lang/parser.tab.c: ../../src/lang/parser.y
+#	$(YACC) -Wcounterexamples -d -p ast_yy -o ../../src/lang/parser.tab.c ../../src/lang/parser.y
 
 clean:
 	rm -rf objs fuellang fuellang.exe
