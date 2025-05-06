@@ -784,7 +784,7 @@ bool check_dir_exist(const char *dir)
 
 bool create_dir(const char *dir)
 {
-	if (mkdir(dir, 0755) != -1)
+	if (mkdir(dir, 0755) == -1)
 		return false;
 
 	return true;
@@ -792,13 +792,13 @@ bool create_dir(const char *dir)
 
 bool get_bin_dir(const char *argv0, char *buf, size_t size)
 {
-	char resolved_path[PATH_MAX];
-	char dir_path[PATH_MAX];
+	char resolved_path[BUF_SIZE];
+	char dir_path[BUF_SIZE];
 	char *dir;
 
 	if (realpath(argv0, resolved_path) == NULL)
 		return false;
-	strncpy(dir_path, resolved_path, PATH_MAX);
+	strncpy(dir_path, resolved_path, BUF_SIZE - 1);
 	dir = dirname(dir_path);
 	strncpy(buf, dir, size - 1);
 	dir_path[size - 1] = '\0';
@@ -808,13 +808,13 @@ bool get_bin_dir(const char *argv0, char *buf, size_t size)
 
 bool get_inst_dir(const char *argv0, char *buf, size_t size)
 {
-	char resolved_path[PATH_MAX];
-	char dir_path[PATH_MAX];
+	char resolved_path[BUF_SIZE];
+	char dir_path[BUF_SIZE];
 	char *dir;
 
 	if (realpath(argv0, resolved_path) == NULL)
 		return false;
-	strncpy(dir_path, resolved_path, PATH_MAX);
+	strncpy(dir_path, resolved_path, BUF_SIZE - 1);
 	dir = dirname(dir_path);
 	dir = dirname(dir);
 	strncpy(buf, dir, size - 1);
