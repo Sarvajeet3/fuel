@@ -31,11 +31,11 @@ cd build/lang-cli && make clean && make CC=i686-w64-mingw32-gcc fuellang.exe && 
 cp build/lang-cli/fuellang.exe fuel-$VERSION/windows/fuellang.exe
 
 # fuelpack.exe
-cd build/pack-cli && make clean && make MINGWCC=i686-w64-mingw32-gcc fuelpack.exe && cd ../..
+cd build/pack-cli && make clean && make CC=i686-w64-mingw32-gcc fuelpack.exe && cd ../..
 cp build/pack-cli/fuelpack.exe fuel-$VERSION/windows/fuelpack.exe
 
 # fuel.exe
-cd build/fuel-cli && make clean && make MINGWCC=i686-w64-mingw32-gcc CPPFLAGS=-DUSE_BINDIST fuel.exe && cd ../..
+cd build/fuel-cli && make clean && make CC=i686-w64-mingw32-gcc CPPFLAGS=-DUSE_BINDIST fuel.exe && cd ../..
 cp build/fuel-cli/fuel.exe fuel-$VERSION/windows/fuel.exe
 
 #
