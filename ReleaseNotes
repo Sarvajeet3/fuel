@@ -1,3 +1,7 @@
+Fuel 0.0.5 7th May 2025
+
+* Added API.millisec
+
 Fuel 0.0.4 7th May 2025
 
 * Added API.playSound()
@@ -13,7 +17,7 @@ Fuel 0.0.2 6th May 2025
 * What's New
     * Improved the Linux CLI.
 
-Fuel 0.0.1 3rd May 2025
+Fuel 0.0.1 5th May 2025
 
 * What's New
     * Our first binary distribution!
