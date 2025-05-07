@@ -22,7 +22,7 @@ It runs on [any post-2000 computer.](docs/porting.md)
 * **Jot & Run** — No boilerplates. Jot down an idea, and it comes alive.
 * **Lightweight** — Runs even on small or older machines.
 * **Ultra Fast** — Built-in JIT compiler brings ultra speed into your code.
-* **Go Far, Stay Close** — Build for platforms you don't own.
+* **Go Far, Stay Close** — Develop for distant platforms, with nothing but your own machine.
 
 ---
 
@@ -82,12 +82,15 @@ Create at your pace, wherever you are in the world. 🌍✨
 ### FuelLang
 
 `FuelLang` (/ˈfjʊəlæŋ/, "fyool-lang") is a lightweight scripting
-language designed specifically for Fuel. With its game-oriented
-syntax, it emphasizes clarity, fast startup, and seamless integration
-with the engine.
+language designed specifically for Fuel. Featuring a game-oriented
+syntax, it emphasizes clarity, instant startup, and seamless
+integration with the engine.
 
 Built-in JIT compiler supports multiple architectures:
-**x86, x86_64, Arm32, Arm64, PowerPC 32, PowerPC 64, MIPS32, and MIPS64.**
+**x86, x86_64, Arm32, Arm64, PowerPC32, PowerPC64, MIPS32, and MIPS64.**
+
+For platforms where JIT is restricted, its C source backend enables
+AOT compilation, making it ideal for mobile deployment.
 
 ---
 
@@ -169,3 +172,4 @@ This software is Awe's small universe. Thank you for visiting. And
 thank you for receiving their seasoned craftsmanship.
 
 Please use this dream-fueled engine with confidence.
+It was made for you, even before we met.
