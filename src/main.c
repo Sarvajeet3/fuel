@@ -8,12 +8,7 @@
 
 #include <locale.h>
 
-struct image *img;
-
-int pos_x;
-int pos_y;
-
-/* Forward declaration. */
+static uint64_t lap_origin;
 
 /*
  * This function is called when the app is going to be initialized.
@@ -32,9 +27,15 @@ bool on_event_boot(char **title, int *width, int *height)
  */
 bool on_event_start(void)
 {
+	/* Initialize the API variables. */
 	set_vm_int("mousePosX", 0);
 	set_vm_int("mousePosY", 0);
+	set_vm_int("millisec", 0);
 
+	/* Initialize the lap timer. */
+	reset_lap_timer(&lap_origin);
+
+	/* Call start(). */
 	call_vm_raw_function("start");
 
 	return true;
@@ -45,8 +46,13 @@ bool on_event_start(void)
  */
 bool on_event_frame(void)
 {
+	/* Get the lap timer. */
+	set_vm_int("millisec", (int)get_lap_timer_millisec(&lap_origin));
+
+	/* Call frame(). */
 	call_vm_raw_function("frame");
 
+	/* Clear input states. */
 	set_vm_int("isMouseLeftPressed", 0);
 	set_vm_int("isMouseRightPressed", 0);
 

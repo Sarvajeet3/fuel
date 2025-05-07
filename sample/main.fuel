@@ -4,9 +4,9 @@ func setup() {
     // Note that APIs are not available in this function.
 
     return {
-        title: "Sample", // Window title
-        width: 640,      // Window width
-        height: 480      // Window height
+        title:  "Sample", // Window title
+        width:  640,      // Window width
+        height: 480       // Window height
     };
 }
 
@@ -24,6 +24,9 @@ func start() {
 func frame() {
     // This function is called every frame.
     // Please do a rendering here.
+
+    // If you want a time, use this. (not used here)
+    var t = API.millisec;
 
     // Get a texture.
     var tex = App.tex1;

@@ -81,9 +81,10 @@ Create at your pace, wherever you are in the world. 🌍✨
 
 ### FuelLang
 
-`FuelLang` is a lightweight scripting language designed specifically
-for Fuel. With its game-oriented syntax, it emphasizes clarity, fast
-startup, and seamless integration with the engine.
+`FuelLang` (/ˈfjʊəlæŋ/, "fyool-lang") is a lightweight scripting
+language designed specifically for Fuel. With its game-oriented
+syntax, it emphasizes clarity, fast startup, and seamless integration
+with the engine.
 
 Built-in JIT compiler supports multiple architectures:
 **x86, x86_64, Arm32, Arm64, PowerPC 32, PowerPC 64, MIPS32, and MIPS64.**
@@ -159,9 +160,10 @@ join us on this journey.
 
 ## About the Author
 
-Awe [aːwe] is a programmer living alone in a small house, surrounded
-by fields. They love writing code — it feels simple and clear.
-Understanding people's feelings takes time, but tools can be kind.
+Awe (/aːwe/, "ah-weh") is a programmer living alone in a small house,
+surrounded by fields. They love writing code — it feels simple and
+clear.  Understanding people's feelings takes time, but tools can be
+kind.
 
 This software is Awe's small universe. Thank you for visiting. And
 thank you for receiving their seasoned craftsmanship.
