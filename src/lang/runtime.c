@@ -2436,7 +2436,11 @@ rt_neg_helper(
 	switch (src_val->type) {
 	case RT_VALUE_INT:
 		dst_val->type = RT_VALUE_INT;
-		dst_val->val.i = ~src_val->val.i;
+		dst_val->val.i = -src_val->val.i;
+		break;
+	case RT_VALUE_FLOAT:
+		dst_val->type = RT_VALUE_FLOAT;
+		dst_val->val.f = -src_val->val.f;
 		break;
 	default:
 		rt_error(rt, _("Value is not an integer."));
