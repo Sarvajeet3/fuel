@@ -83,7 +83,7 @@ This API starts playing a sound asset file on a specified sound track.
 
 |Argument Name       |Description                                                   |
 |--------------------|--------------------------------------------------------------|
-|track               |Track index. (0-4)                                            |
+|stream              |Track index. (0-4)                                            |
 |file                |File to play.                                                 |
 
 ### API.stopSound()
@@ -92,7 +92,7 @@ This API stops a sound playback on a specified sound track.
 
 |Argument Name       |Description                                                   |
 |--------------------|--------------------------------------------------------------|
-|track               |Track index. (0-4)                                            |
+|stream              |Track index. (0-4)                                            |
 
 ### API.setVolume()
 
@@ -100,7 +100,7 @@ This API sets a sound volume on a specified sound track.
 
 |Argument Name       |Description                                                   |
 |--------------------|--------------------------------------------------------------|
-|track               |Track index. (0-4)                                            |
+|stream              |Track index. (0-4)                                            |
 |volume              |Volume value. (0.0-1.0)                                       |
 
 ## Font
@@ -120,7 +120,7 @@ This API draws a text to a texture.
 
 |Argument Name       |Description                                                   |
 |--------------------|--------------------------------------------------------------|
-|tex                 |Texture.                                                      |
+|dst                 |Texture.                                                      |
 |text                |Text to draw.                                                 |
 |x                   |X coordinate.                                                 |
 |y                   |Y coordinate.                                                 |

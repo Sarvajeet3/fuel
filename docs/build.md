@@ -62,10 +62,10 @@ make CC=gcc CXX=g++ LD=ld AR=ar STRIP=strip WINDRES=windres
 ### Prerequisite
 
 * A Linux machine
-* `Ubuntu` or `Debian` installed
+* `Ubuntu`, `Debian`, or `Raspberry Pi OS` installed
 * `GNU Make` installed
 
-On Debian or Ubuntu:
+On Debian, Ubuntu, or Raspberry Pi OS:
 ```
 sudo apt-get install build-essential libx11-dev libxpm-dev mesa-common-dev libasound2-dev
 ```
@@ -189,6 +189,21 @@ sudo make install
 * `gtar` and `gmake` installed (by pkg_add)
 
 Note that `gtar` and `gmake` are build dependencies and not needed for a run.
+
+### Steps
+
+Open a terminal and enter a Fuel direcotry, then type the following.
+
+```
+./configure
+make
+sudo make install
+```
+
+## Haiku
+
+* A `Haiku` virtual machine
+* `make` installed
 
 ### Steps
 

@@ -64,3 +64,14 @@ Other platforms are also supported in a similar way.
 
 With just a few simple commands, you can go from a blank folder to a running and exported game.
 For more details, please see the [documentation.](index.md)
+
+---
+
+## Fuel Tutorial Game
+
+We are looking for a small, fun example game that demonstrates what
+Fuel can do.  This could be a side-scrolling shooter, a puzzle game,
+or anything that shows off FuelLang and the engine API.
+
+If you're interested in contributing, open an issue or drop a message
+in the community.
