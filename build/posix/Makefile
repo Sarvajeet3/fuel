@@ -25,7 +25,6 @@ CFLAGS=\
 	-std=gnu11
 
 LDFLAGS=\
-	-framework AudioUnit \
 	-L/usr/local/lib \
 	-L/usr/pkg/lib \
 	-L/usr/X11R7/lib \
