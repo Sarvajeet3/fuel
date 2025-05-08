@@ -202,6 +202,8 @@ sudo make install
 
 ## Haiku
 
+### Prerequisite
+
 * A `Haiku` virtual machine
 * `make` installed
 
