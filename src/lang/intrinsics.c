@@ -17,6 +17,7 @@
 
 #define NEVER_COME_HERE		0
 
+static bool rt_intrin_global(struct rt_env *rt);
 static bool rt_intrin_length(struct rt_env *rt);
 static bool rt_intrin_push(struct rt_env *rt);
 static bool rt_intrin_unset(struct rt_env *rt);
@@ -33,6 +34,7 @@ rt_register_intrinsics(
 		const char *param[RT_ARG_MAX];
 		bool (*cfunc)(struct rt_env *rt);
 	} items[] = {
+		{"global", 2, {"name", "val"}, rt_intrin_global},
 		{"length", 1, {"val"}, rt_intrin_length},
 		{"push", 2, {"arr", "val"}, rt_intrin_push},
 		{"unset", 2, {"dict", "key"}, rt_intrin_unset},
@@ -49,6 +51,28 @@ rt_register_intrinsics(
 				       items[i].cfunc))
 			return false;
 	}
+
+	return true;
+}
+
+/* global() */
+static bool
+rt_intrin_global(
+	struct rt_env *rt)
+{
+	struct rt_value name, val;
+	const char *name_s;
+
+	if (!rt_get_arg(rt, 0, &name))
+		return false;
+	if (!rt_get_string(rt, &name, &name_s))
+		return false;
+
+	if (!rt_get_arg(rt, 1, &val))
+		return false;
+
+	if (!rt_set_global(rt, name_s, &val))
+		return false;
 
 	return true;
 }

@@ -36,7 +36,7 @@ bool on_event_start(void)
 	reset_lap_timer(&lap_origin);
 
 	/* Call start(). */
-	call_vm_raw_function("start");
+	call_vm_function("start");
 
 	return true;
 }
@@ -50,7 +50,7 @@ bool on_event_frame(void)
 	set_vm_int("millisec", (int)get_lap_timer_millisec(&lap_origin));
 
 	/* Call frame(). */
-	call_vm_raw_function("frame");
+	call_vm_function("frame");
 
 	/* Clear input states. */
 	set_vm_int("isMouseLeftPressed", 0);

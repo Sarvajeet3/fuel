@@ -137,6 +137,8 @@ static bool call_setup(char **title, int *width, int *height)
 				break;
 		}
 
+		rt_shallow_gc(rt);
+
 		succeeded = true;
 	} while (0);
 	if (!succeeded) {
@@ -152,7 +154,7 @@ static bool call_setup(char **title, int *width, int *height)
 /*
  * Call a VM function.
  */
-bool call_vm_raw_function(const char *func_name)
+bool call_vm_function(const char *func_name)
 {
 	struct rt_value ret;
 
@@ -164,6 +166,13 @@ bool call_vm_raw_function(const char *func_name)
 			  rt_get_error_message(rt));
 		return false;
 	}
+
+	/* Do a shallow GC. */
+	shallow_gc();
+
+	/* Do a deep GC if required. */
+	if (get_heap_usage() > 256 * 1024 * 1024)
+		deep_gc();
 
 	return true;
 }
@@ -263,4 +272,32 @@ bool set_vm_int(const char *prop_name, int val)
 		return false;
 
 	return true;
+}
+
+/*
+ * Get the heap usage.
+ */
+size_t get_heap_usage(void)
+{
+	size_t ret;
+
+	rt_get_heap_usage(rt, &ret);
+
+	return ret;
+}
+
+/*
+ * Do a shallow GC.
+ */
+void shallow_gc(void)
+{
+	rt_shallow_gc(rt);
+}
+
+/*
+ * Do a deep GC.
+ */
+void deep_gc(void)
+{
+	rt_deep_gc(rt);
 }

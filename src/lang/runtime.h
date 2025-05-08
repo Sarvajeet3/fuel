@@ -551,6 +551,12 @@ rt_get_heap_usage(
 	struct rt_env *rt,
 	size_t *ret);
 
+/* Make a strong reference. */
+void
+rt_make_deep_reference(
+	struct rt_env *rt,
+	struct rt_value *val);
+
 /*
  * Execution helpers
  */

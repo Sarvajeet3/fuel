@@ -126,15 +126,19 @@ static bool API_loadTexture(struct rt_env *rt)
 
 	if (!rt_make_empty_dict(rt, &ret))
 		return false;
+
 	rt_make_int(&ival, tex_id);
 	if (!rt_set_dict_elem(rt, &ret, "id", &ival))
 		return false;
+
 	rt_make_int(&ival, tex_width);
 	if (!rt_set_dict_elem(rt, &ret, "width", &ival))
 		return false;
+
 	rt_make_int(&ival, tex_height);
 	if (!rt_set_dict_elem(rt, &ret, "height", &ival))
 		return false;
+
 	if (!rt_set_return(rt, &ret))
 		return false;
 

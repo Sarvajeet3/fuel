@@ -50,7 +50,6 @@ static bool rt_enter_frame(struct rt_env *rt, struct rt_func *func);
 static void rt_leave_frame(struct rt_env *rt);
 static bool rt_expand_array(struct rt_env *rt, struct rt_value *array, int size);
 static bool rt_expand_dict(struct rt_env *rt, struct rt_value *dict, int size);
-static void rt_make_deep_reference(struct rt_env *rt, struct rt_value *val);
 static void rt_recursively_mark_object(struct rt_env *rt, struct rt_value *val);
 static void rt_free_string(struct rt_env *rt, struct rt_string *str);
 static void rt_free_array(struct rt_env *rt, struct rt_array *array);
@@ -952,7 +951,7 @@ rt_make_empty_dict(struct rt_env *rt, struct rt_value *val)
 	val->type = RT_VALUE_DICT;
 	val->val.dict = dict;
 
-	/* Add to the shallow array list. */
+	/* Add to the shallow dict list. */
 	if (rt->frame != NULL) {
 		dict->next = rt->frame->shallow_dict_list;
 		if (rt->frame->shallow_dict_list != NULL)
@@ -1579,6 +1578,8 @@ rt_set_global(
 {
 	struct rt_bindglobal *global;
 
+	rt_make_deep_reference(rt, val);
+
 	if (!rt_find_global(rt, name, &global)) {
 		if (!rt_add_global(rt, name, &global))
 			return false;
@@ -1666,7 +1667,7 @@ rt_shallow_gc(
 		rt_free_dict(rt, dict);
 		dict = next_dict;
 	}
-	rt->garbage_arr_list = NULL;
+	rt->garbage_dict_list = NULL;
 
 	return true;
 }
@@ -1727,9 +1728,11 @@ rt_deep_gc(
 			/* Unlink. */
 			if (str->prev != NULL) {
 				str->prev->next = str->next;
-				str->next->prev = str->prev;
+				if (str->next != NULL)
+					str->next->prev = str->prev;
 			} else {
-				str->next->prev = NULL;
+				if (str->next != NULL)
+					str->next->prev = NULL;
 				rt->deep_str_list = str->next;
 			}
 
@@ -1747,9 +1750,11 @@ rt_deep_gc(
 			/* Unlink. */
 			if (arr->prev != NULL) {
 				arr->prev->next = arr->next;
-				arr->next->prev = arr->prev;
+				if (arr->next != NULL)
+					arr->next->prev = arr->prev;
 			} else {
-				arr->next->prev = NULL;
+				if (arr->next != NULL)
+					arr->next->prev = NULL;
 				rt->deep_arr_list = arr->next;
 			}
 
@@ -1767,10 +1772,12 @@ rt_deep_gc(
 			/* Unlink. */
 			if (dict->prev != NULL) {
 				dict->prev->next = dict->next;
-				dict->next->prev = dict->prev;
+				if (dict->next != NULL)
+					dict->next->prev = dict->prev;
 			} else {
-				dict->next->prev = NULL;
-				rt->deep_arr_list = arr->next;
+				if (dict->next != NULL)
+					dict->next->prev = NULL;
+				rt->deep_dict_list = dict->next;
 			}
 
 			/* Remove. */
@@ -1798,10 +1805,12 @@ rt_recursively_mark_object(
 		val->val.str->is_marked = true;
 		break;
 	case RT_VALUE_ARRAY:
+		val->val.arr->is_marked = true;
 		for (i = 0; i < val->val.arr->size; i++)
 			rt_recursively_mark_object(rt, &val->val.arr->table[i]);
 		break;
 	case RT_VALUE_DICT:
+		val->val.dict->is_marked = true;
 		for (i = 0; i < val->val.dict->size; i++)
 			rt_recursively_mark_object(rt, &val->val.dict->value[i]);
 		break;
@@ -1814,13 +1823,31 @@ rt_recursively_mark_object(
 }
 
 /* Set the reference of a value's object as strong.  */
-static void
+void
 rt_make_deep_reference(
 	struct rt_env *rt,
 	struct rt_value *val)
 {
-	if (rt->frame != NULL)
-		return;
+	if (rt->frame == NULL) {
+		switch (val->type) {
+		case RT_VALUE_INT:
+		case RT_VALUE_FLOAT:
+		case RT_VALUE_FUNC:
+			return;
+		case RT_VALUE_STRING:
+			val->val.str->is_deep = true;
+			return;
+		case RT_VALUE_ARRAY:
+			val->val.arr->is_deep = true;
+			return;
+		case RT_VALUE_DICT:
+			val->val.dict->is_deep = true;
+			return;
+		default:
+			assert(NEVER_COME_HERE);
+			return;
+		}
+	}
 
 	switch (val->type) {
 	case RT_VALUE_INT:
@@ -1832,15 +1859,19 @@ rt_make_deep_reference(
 			/* Unlink from the shallow list. */
 			if (val->val.str->prev != NULL) {
 				val->val.str->prev->next = val->val.str->next;
-				val->val.str->next->prev = val->val.str->prev;
+				if (val->val.str->next != NULL)
+					val->val.str->next->prev = val->val.str->prev;
 			} else {
-				val->val.str->next->prev = NULL;
+				if (val->val.str->next != NULL)
+					val->val.str->next->prev = NULL;
 				rt->frame->shallow_str_list = val->val.str->next;
 			}
 
 			/* Link to the deep list. */
+			val->val.str->prev = NULL;
 			val->val.str->next = rt->deep_str_list;
-			rt->deep_str_list->prev = val->val.str;
+			if (rt->deep_str_list != NULL)
+				rt->deep_str_list->prev = val->val.str;
 			rt->deep_str_list = val->val.str;
 
 			/* Make deep. */
@@ -1852,15 +1883,19 @@ rt_make_deep_reference(
 			/* Unlink from the shallow list. */
 			if (val->val.arr->prev != NULL) {
 				val->val.arr->prev->next = val->val.arr->next;
-				val->val.arr->next->prev = val->val.arr->prev;
+				if (val->val.arr->next != NULL)
+					val->val.arr->next->prev = val->val.arr->prev;
 			} else {
-				val->val.arr->next->prev = NULL;
+				if (val->val.arr->next != NULL)
+					val->val.arr->next->prev = NULL;
 				rt->frame->shallow_arr_list = val->val.arr->next;
 			}
 
 			/* Link to the deep list. */
+			val->val.arr->prev = NULL;
 			val->val.arr->next = rt->deep_arr_list;
-			rt->deep_arr_list->prev = val->val.arr;
+			if (rt->deep_arr_list != NULL)
+				rt->deep_arr_list->prev = val->val.arr;
 			rt->deep_arr_list = val->val.arr;
 
 			/* Make deep. */
@@ -1872,15 +1907,19 @@ rt_make_deep_reference(
 			/* Unlink from the shallow list. */
 			if (val->val.dict->prev != NULL) {
 				val->val.dict->prev->next = val->val.dict->next;
-				val->val.dict->next->prev = val->val.dict->prev;
+				if (val->val.dict->next != NULL)
+					val->val.dict->next->prev = val->val.dict->prev;
 			} else {
-				val->val.dict->next->prev = NULL;
+				if (val->val.dict->next != NULL)
+					val->val.dict->next->prev = NULL;
 				rt->frame->shallow_dict_list = val->val.dict->next;
 			}
 
 			/* Link to the deep list. */
+			val->val.dict->prev = NULL;
 			val->val.dict->next = rt->deep_dict_list;
-			rt->deep_dict_list->prev = val->val.dict;
+			if (rt->deep_dict_list != NULL)
+				rt->deep_dict_list->prev = val->val.dict;
 			rt->deep_dict_list = val->val.dict;
 
 			/* Make deep. */
@@ -2856,6 +2895,8 @@ rt_storearray_helper(
 			return false;
 	}
 
+	rt_make_deep_reference(rt, val_val);
+
 	return true;
 }
 
@@ -3130,6 +3171,8 @@ rt_storedot_helper(
 	/* Store. */
 	if (!rt_set_dict_elem(rt, &rt->frame->tmpvar[dict], field, &rt->frame->tmpvar[src]))
 		return false;
+
+	rt_make_deep_reference(rt, &rt->frame->tmpvar[src]);
 
 	return true;
 }
