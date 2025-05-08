@@ -182,10 +182,8 @@ int command_run(int argc, char *argv[])
 		return 1;
 	}
 
-	if (!get_bin_dir(argv[0], dir, BUF_SIZE)) {
-		printf("Could not get path.\n");
-		return 1;
-	}
+	if (!get_bin_dir(argv[0], dir, BUF_SIZE))
+		strncpy(dir, "", BUF_SIZE - 1);
 
 #if defined(TARGET_MACOS) && !defined(TARGET_POSIX)
 	/* For macOS. */
@@ -801,22 +799,28 @@ bool get_bin_dir(const char *argv0, char *buf, size_t size)
 	if (len == -1)
 		return false;
 	resolved_path[len] = '\0';
-#elif defined(TARGET_FREEBSD)
-	ssize_t len = readlink("/proc/curproc/file", resolved_path, BUF_SIZE - 1);
-	if (len == -1)
-		return false;
-	resolved_path[len] = '\0';
-#else
-	if (realpath(argv0, resolved_path) == NULL)
-		return false;
-#endif
-
 	strncpy(dir_path, resolved_path, BUF_SIZE - 1);
 	dir = dirname(dir_path);
 	strncpy(buf, dir, size - 1);
 	dir_path[size - 1] = '\0';
-
 	return true;
+#elif defined(TARGET_FREEBSD)
+	int mib[4];
+	size_t len = BUF_SIZE - 1;
+	mib[0] = CTL_KERN;
+	mib[1] = KERN_PROC;
+	mib[2] = KERN_PROC_PATHNAME;
+	mib[3] = -1;
+	if (sysctl(mib, 4, resolved_path, &len, NULL, 0) != 0)
+		return false;
+	strncpy(dir_path, resolved_path, BUF_SIZE - 1);
+	dir = dirname(dir_path);
+	strncpy(buf, dir, size - 1);
+	dir_path[size - 1] = '\0';
+	return true;
+#else
+	return false;
+#endif
 }
 
 bool get_inst_dir(const char *argv0, char *buf, size_t size)
