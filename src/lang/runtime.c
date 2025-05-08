@@ -1165,6 +1165,12 @@ rt_expand_array(
 
 	/* Expand the table. */
 	if (arr->alloc_size < size) {
+		/* Get a next size. */
+		if (size < arr->alloc_size * 2)
+			size = arr->alloc_size * 2;
+		else
+			size = size * 2;
+
 		/* Decrement the heap usage. */
 		rt->heap_usage -= (size_t)arr->alloc_size * sizeof(struct rt_value);
 
@@ -1357,6 +1363,12 @@ rt_expand_dict(
 
 	/* Expand the table. */
 	if (d->alloc_size < size) {
+		/* Get a next size. */
+		if (size < d->alloc_size * 2)
+			size = d->alloc_size * 2;
+		else
+			size = size * 2;
+
 		/* Decrement the heap usage. */
 		rt->heap_usage -= (size_t)d->alloc_size * (sizeof(char *) + sizeof(struct rt_value));
 

@@ -10,7 +10,7 @@ CPPFLAGS=\
 	-DUSE_TRANSLATION
 
 CFLAGS=\
-	-O3 \
+	-O2 \
 	-g0 \
 	-std=gnu11 \
 	-Wall \
