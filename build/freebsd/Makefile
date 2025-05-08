@@ -6,7 +6,7 @@ STRIP=strip
 CPPFLAGS=\
 	-DUSE_JIT \
 	-DUSE_TRANSLATION \
-	-DUSE_X11_SOFTRENDER \
+	-DUSE_X11_OPENGL \
 	-I../../src \
 	-I./libroot/include \
 	-I/usr/local/include
@@ -277,7 +277,7 @@ libroot:
 #
 
 setup:
-	sudo pkg install xorg libX11 libXpm mesa-devel gstreamer1 gstreamer1-plugins
+	sudo pkg install xorg libX11 libXpm mesa-devel
 
 clean:
 	rm -rf objs fuel

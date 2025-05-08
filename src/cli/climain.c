@@ -790,33 +790,23 @@ bool create_dir(const char *dir)
 
 bool get_bin_dir(const char *argv0, char *buf, size_t size)
 {
+#if defined(TARGET_LINUX)
 	char resolved_path[BUF_SIZE];
 	char dir_path[BUF_SIZE];
 	char *dir;
+	ssize_t len;
 
-#if defined(TARGET_LINUX)
-	ssize_t len = readlink("/proc/self/exe", resolved_path, BUF_SIZE - 1);
+	len = readlink("/proc/self/exe", resolved_path, BUF_SIZE - 1);
 	if (len == -1)
 		return false;
 	resolved_path[len] = '\0';
+
 	strncpy(dir_path, resolved_path, BUF_SIZE - 1);
 	dir = dirname(dir_path);
+
 	strncpy(buf, dir, size - 1);
 	dir_path[size - 1] = '\0';
-	return true;
-#elif defined(TARGET_FREEBSD)
-	int mib[4];
-	size_t len = BUF_SIZE - 1;
-	mib[0] = CTL_KERN;
-	mib[1] = KERN_PROC;
-	mib[2] = KERN_PROC_PATHNAME;
-	mib[3] = -1;
-	if (sysctl(mib, 4, resolved_path, &len, NULL, 0) != 0)
-		return false;
-	strncpy(dir_path, resolved_path, BUF_SIZE - 1);
-	dir = dirname(dir_path);
-	strncpy(buf, dir, size - 1);
-	dir_path[size - 1] = '\0';
+
 	return true;
 #else
 	return false;
