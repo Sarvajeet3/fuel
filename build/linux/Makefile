@@ -11,8 +11,8 @@ CPPFLAGS=\
 	-I./libroot/include
 
 CFLAGS=\
-	-O2 \
-	-g0 \
+	-O0 \
+	-g3 \
 	-ffast-math \
 	-ftree-vectorize \
 	-std=gnu11 \

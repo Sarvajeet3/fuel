@@ -796,8 +796,21 @@ bool get_bin_dir(const char *argv0, char *buf, size_t size)
 	char dir_path[BUF_SIZE];
 	char *dir;
 
+#if defined(TARGET_LINUX)
+	ssize_t len = readlink("/proc/self/exe", resolved_path, BUF_SIZE - 1);
+	if (len == -1)
+		return false;
+	resolved_path[len] = '\0';
+#elif defined(TARGET_FREEBSD)
+	ssize_t len = readlink("/proc/curproc/file", resolved_path, BUF_SIZE - 1);
+	if (len == -1)
+		return false;
+	resolved_path[len] = '\0';
+#else
 	if (realpath(argv0, resolved_path) == NULL)
 		return false;
+#endif
+
 	strncpy(dir_path, resolved_path, BUF_SIZE - 1);
 	dir = dirname(dir_path);
 	strncpy(buf, dir, size - 1);

@@ -1,5 +1,5 @@
 DESTDIR=/usr/local
-BUILDDIR=build/posix
+BUILDDIR=build/linux
 TARGET_POSTFIX=
 CC=cc
 CXX=c++
