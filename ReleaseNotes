@@ -1,3 +1,7 @@
+Fuel 0.0.7 8th May 2025
+
+* Fixed a bug where array/dict expansion causes crashes
+
 Fuel 0.0.6 8th May 2025
 
 * Enabled GC by default
