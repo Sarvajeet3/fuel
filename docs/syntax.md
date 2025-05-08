@@ -237,11 +237,26 @@ func main() {
 }
 ```
 
-## push()
+### push()
 
 ```
 func main() {
     var array = [0, 1, 2];
     push(array, 3);        // Add to the last.
+}
+```
+
+### global
+
+```
+func main() {
+    var my_class = {
+        member: 0,
+        method: lambda (this, a) {
+            return this.member + a;
+        }
+    };
+
+    global("MyClass", my_class);
 }
 ```

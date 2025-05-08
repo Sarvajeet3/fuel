@@ -1,7 +1,13 @@
-site_name: Project Wiki
+site_name: Fuel Game Engine Docs
+repo_url: https://github.com/awemorris/fuel
 nav:
   - Home: index.md
-  - Guide:
-      - Getting Started: guide/getting-started.md
+  - Getting Started: gettingstarted.md
+
 theme:
   name: material
+  features:
+    - navigation.expand
+    - navigation.tabs
+    - search.suggest
+    - content.code.annotate

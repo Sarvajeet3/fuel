@@ -27,19 +27,35 @@ codes in the SYSV calling convention, not the Microsoft one.
 * A `Windows 11` PC with an Intel, AMD, or Arm64 processor
 * `WSL2` environment installed
 * `Ubuntu` or `Debian` installed
+* Run the folowing:
+```
+sudo apt-get install mingw-w64
+```
 
 ### Steps
 
 Open a terminal and enter a Fuel direcotry, then type the following.
 
 ```
-cd build/windows
-./setup.sh          # This will install build dependencies. First time only.
-./build-libs.sh     # This will build libraries. First time only.
+cd build/win32
 make
 ```
 
-A file named `fuel.exe` will be built.
+## Windows (MSYS2)
+
+### Prerequisite
+
+* A `Windows 11` PC with an Intel, AMD, or Arm64 processor
+* `MSYS2` environment installed
+
+### Steps
+
+Open a terminal and enter a Fuel direcotry, then type the following.
+
+```
+cd build/win32
+make CC=gcc CXX=g++ LD=ld AR=ar STRIP=strip WINDRES=windres
+```
 
 ## Linux
 
@@ -49,17 +65,25 @@ A file named `fuel.exe` will be built.
 * `Ubuntu` or `Debian` installed
 * `GNU Make` installed
 
+On Debian or Ubuntu:
+```
+sudo apt-get install build-essential libx11-dev libxpm-dev mesa-common-dev libasound2-dev
+```
+
+On RedHat, Rocky Linux, Fedora, etc.:
+```
+sudo dnf install patch libX11-devel libXpm-devel alsa-lib-devel mesa-libGL-devel
+```
+
 ### Steps
 
 Open a terminal and enter a Fuel direcotry, then type the following.
 
 ```
-cd build/linux
-make setup          # This will install build dependencies. First time only.
+./configure
 make
+sudo make install
 ```
-
-A file named `fuel` will be built.
 
 ## macOS
 
@@ -136,33 +160,26 @@ Note that you need to copy game files into `assets` folder.
 Open a terminal and enter a Fuel direcotry, then type the following.
 
 ```
-cd build/freebsd
-make setup          # This will install build dependencies. First time only.
+./configure
 make
+sudo make install
 ```
-
-A file named `fuel` will be built.
 
 ## NetBSD
 
 ### Prerequisite
 
 * A `NetBSD` machine
-* `elfctl` installed (by pkg_add)
-
-Note that `elfctl` is a build dependency and not needed for a run.
 
 ### Steps
 
 Open a terminal and enter a Fuel direcotry, then type the following.
 
 ```
-cd build/netbsd
-sudo make nproc          # This will create nproc script. First time only.
+./configure
 make
+sudo make install
 ```
-
-A file named `fuel` will be built.
 
 ## OpenBSD
 
@@ -178,9 +195,7 @@ Note that `gtar` and `gmake` are build dependencies and not needed for a run.
 Open a terminal and enter a Fuel direcotry, then type the following.
 
 ```
-cd build/openbsd
-sudo make nproc          # This will create nproc script. First time only.
+./configure
 make
+sudo make install
 ```
-
-A file named `fuel` will be built.

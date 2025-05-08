@@ -6,7 +6,7 @@ Follow the steps below to create and run your first game.
 
 ## 1. Download the Binary
 
-Download the latest fuel binary from the Releases page.
+Download the latest Fuel binary from the [Releases Page](https://github.com/awemorris/fuel/releases).
 
 ## 2. Add Fuel to Your PATH
 
