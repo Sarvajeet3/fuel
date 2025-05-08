@@ -1,3 +1,8 @@
+Fuel 0.0.6 8th May 2025
+
+* Enabled GC by default
+* Fixed some GC crash bugs
+
 Fuel 0.0.5 7th May 2025
 
 * Added API.millisec

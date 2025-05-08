@@ -1,11 +1,16 @@
 Fuel
 ====
 
+“If a game engine could run anywhere, how would the world change?”_
+
+Fuel was born from this single question.
+
 `Fuel` is a minimal C89 game engine with multi-arch JIT,
 hardware-accelerated rendering backends, and platform-native audio
 pipelines — built for production deployment.
 
-It runs on [any post-2000 computer.](docs/porting.md)
+It runs on [any post-2000 computer,](docs/porting.md)
+from under-resourced hardware to cutting-edge systems.
 
 ---
 
