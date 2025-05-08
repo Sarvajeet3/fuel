@@ -2177,6 +2177,7 @@ hir_fatal(
 /* Show out-of-memory error. */
 static void hir_out_of_memory(void)
 {
+	assert(hir_file_name != NULL);
 	snprintf(hir_error_message,
 		 sizeof(hir_error_message),
 		 "%s: Out of memory error.",
