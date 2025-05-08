@@ -1131,7 +1131,7 @@ rt_set_array_elem(struct rt_env *rt, struct rt_value *array, int index, struct r
 	assert(array->type == RT_VALUE_ARRAY);
 
 	/* Expand the array if needed. */
-	if (!rt_expand_array(rt, array, index))
+	if (!rt_expand_array(rt, array, index + 1))
 		return false;
 	if (array->val.arr->size < index + 1)
 		array->val.arr->size = index + 1;
@@ -1366,7 +1366,7 @@ rt_expand_dict(
 			rt_out_of_memory(rt);
 			return false;
 		}
-		memcpy(new_key, d->key, sizeof(struct rt_value) * (size_t)d->alloc_size);
+		memcpy(new_key, d->key, sizeof(const char *) * (size_t)d->alloc_size);
 		free(d->key);
 		d->key = new_key;
 
