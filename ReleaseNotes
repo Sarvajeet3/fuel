@@ -1,3 +1,7 @@
+Fuel 0.0.8 8th May 2025
+
+* Fixed the 'fuel run' command on Linux to properly get the binary directory
+
 Fuel 0.0.7 8th May 2025
 
 * Fixed a bug where array/dict expansion causes crashes
